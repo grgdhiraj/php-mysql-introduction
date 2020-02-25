@@ -1,62 +1,42 @@
 <?php
+require 'connection.php';
+require 'insert.php';
 
-require "connection.php";
-$connection = openConnection();
+ini_set('display_errors', "1");
+ini_set('display_startup_errors', "1");
+error_reporting(E_ALL);
 
-if ($connection){
-    echo 'Successfully Connected!';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $newConnection = openConnection();
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $username = $_POST ['username'];
+    $linkedin = $_POST ['linkedin'];
+    $github = $_POST ['github'];
+    $email = $_POST ['email'];
+    $preferred_language = $_POST ['preferred_language'];
+    $avatar = $_POST ['avatar'];
+    $video = $_POST ['video'];
+    $quote = $_POST ['quote'];
+    $quote_author = $_POST ['quote_author'];
+
+    $insertInfo = "INSERT INTO students (first_name, last_name, username, linkedin, github, email, preferred_language, avatar, video, quote, quote_author)
+                             VALUES (:first_name, :last_name, :username, :linkedin, :github, :email, :preferred_language, :avatar, :video, :quote, :quote_author)";
+
+
+    $newConnection->prepare($insertInfo)
+        ->execute([
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'username' => $username,
+            'linkedin' => $linkedin,
+            'github' => $github,
+            'email' => $email,
+            'preferred_language' => $preferred_language,
+            'avatar' => $avatar,
+            'video' => $video,
+            'quote' => $quote,
+            'quote_author' => $quote_author
+        ]);
 }
-?>
-<body>
-
-<form action="">
-    <br>
-    <br>
-    <label for="id"><b>Id: </b></label>
-        <input type="text"  name="id" >
-         <br>
-         <br>
-    <label for="firstname"><b>First Name: </b></label>
-        <input type="text" name="firstname">
-    <br>
-    <br>
-         <label for="lastname"><b>Last Name: </b></label>
-        <input type="text" name="lastname">
-    <br>
-    <br>
-        <label for="username"><b>Username: </b></label>
-        <input type="text" name="username">
-    <br>
-    <br>
-         <label for="linkedin"><b>LinkedIn: </b></label>
-        <input type="url" placeholder="URL of your LinkedIn" linkedin">
-    <br>
-    <br>
-        <label for="github"><b>Github: </b></label>
-        <input type="url" placeholder= "URL of your Github profile"  name="github">
-    <br>
-    <br>
-        <label for="email"><b>Email: </b></label>
-        <input type="email" name="email">
-    <br>
-    <br>
-        <label for="language"><b>Preferred language: </b></label>
-        <input type="text" name="language">
-    <br>
-    <br>
-        <label for="avatar"><b>Avatar: </b></label>
-        <input type="text" placeholder="URL of the picture" name="avatar">
-    <br>
-    <br>
-         <label for="video"><b>Video: </b></label>
-         <input type="URL" placeholder="YouTube link to a music video you like" name="video">
-    <br>
-    <br>
-        <label for="quote"><b>Quote: </b></label>
-        <input type="text" placeholder="Quote you like" "quote">
-    <br>
-    <br>
-        <label for="quote_author"><b>Quote author: </b></label>
-        <input type="text" placeholder="Person who made the quote" name="quote_author">
-
-</form>
