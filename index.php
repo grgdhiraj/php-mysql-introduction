@@ -6,8 +6,10 @@ ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 require 'Controller/controllerHomepage.php';
+require 'Model/user.php';
+require 'Model/connection.php';
 $controller = new controllerHomepage();
-
+$controller ->fillDatabase();
 
 /*declare(strict_types=1);
 
