@@ -5,20 +5,37 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+require 'Controller/loginControl.php';
+require 'Controller/registerControl.php';
 require 'Controller/controllerHomepage.php';
+require 'Controller/profileControl.php';
 require 'Model/user.php';
 require 'Model/connection.php';
-$controller = new controllerHomepage();
-$controller ->fillDatabase();
+require 'Model/Query.php';
+require 'Model/account.php';
+require 'Model/authentication.php';
 
-/*declare(strict_types=1);
 
-ini_set('display_errors', "1");
-ini_set('display_startup_errors', "1");
-error_reporting(E_ALL);
 
-require 'Model/connection.php';
-require 'View/insert.php';*/
+
+
+if(!empty($_POST['submitButton'])){
+    $controller = new controllerHomepage();
+    $controller->render();
+}elseif (!empty($_POST['create'])){
+    $controller = new registerControl();
+    $controller->render();
+}elseif (!isset($_GET['user'])){
+    $controller = new loginControl();
+    $controller->render();
+}
+else {
+    $profileControl = new profileControl();
+    $profileControl->render();
+}
+//$controller = new controllerHomepage();
+//$controller ->render();
+
 /*
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 

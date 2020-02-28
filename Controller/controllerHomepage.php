@@ -1,15 +1,10 @@
 <?php
 declare(strict_types=1);
 
-
-
-
-
-
 class controllerHomepage
 {
 
-    public function fillDatabase()
+    public function render()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newConnection = new Connection();
@@ -26,6 +21,7 @@ class controllerHomepage
                 $_POST['quote'],
                 $_POST['quote_author']
             );
+
             $insertInfo = "INSERT INTO students (first_name, last_name, username, linkedin, github, email, preferred_language, avatar, video, quote, quote_author)
                              VALUES (:first_name, :last_name, :username, :linkedin, :github, :email, :preferred_language, :avatar, :video, :quote, :quote_author)";
 
@@ -47,7 +43,6 @@ class controllerHomepage
 
         }
         require "View/insert.php";
-
     }
 }
 

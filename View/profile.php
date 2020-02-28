@@ -18,7 +18,7 @@ $user= $stmt->fetch();
 <!doctype html>
 <html lang="en">
 <body>
-<form action="index.php" method="post">
+
     <img src="<?php echo $user['avatar']?>" alt="<?php echo $user['avatar']?>" width="300px" height="300px">
     <p><strong>id:</strong> <?php echo $user['id']?></p>
     <p><strong>First name:</strong> <?php echo $user['first_name']?></p>

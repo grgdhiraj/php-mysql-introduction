@@ -1,7 +1,4 @@
 <?php
-/*if (!function_exists('openConnection')) {
-    function openConnection()*/
-
 
 // Try to figure out what these should be for you
 class Connection{
@@ -27,9 +24,11 @@ class Connection{
         $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 
+
+// Why we do this here
         return $pdo;
 
     }
 }
-/*$connect = openConnection();*/
+
 
